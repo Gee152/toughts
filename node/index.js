@@ -1,12 +1,24 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const session = require('express-session')
-const FileStore = require('session-file-store')
+const FileStore = require('session-file-store')(session);
 const flash = require('express-flash')
 
 const app = express() //chamando express
 
- // impostando handlebars
+//Models
+const Tought = require('./models/Tought')
+const User = require('./models/User')
+
+
+//Import routes
+const toughtRoutes = require('./routes/toughtRoutes')
+const authRoutes = require('./routes/authRoutes')
+
+//import controller
+const ToughtController = require('./controllers/ToughtController')
+
+ //impostando handlebars
 app.engine('handlebars', exphbs())
 app.set('view engine', 'handlebars')
 
@@ -53,10 +65,18 @@ app.use((req, res, next) => {
     next()
 })
 
-const conn = require('./db/conn') //chamando conn.js
+//Routes
+app.use('/toughts', toughtRoutes)
+app.use('/', authRoutes)
+
+app.get('/', ToughtController.showToughts)
+
+
+const conn = require('./db/conn'); //chamando conn.js
+
 
 conn
-    .sync()
+    .sync(/* {force:true} */)
     .then(() =>{
         app.listen(3000)
     })
