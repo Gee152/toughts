@@ -1,4 +1,4 @@
-# toughts
+# Toughts - Pensamentos
 Projeto para criação de usuarios, criação de pensamento e post.
 
 ## Desenvolvido
