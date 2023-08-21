@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize') // importando sequelize
 
-const sequelize = new Sequelize('social', 'root', 'G@briel152', {
+const sequelize = new Sequelize('social', 'root', '', {
     host: 'localhost',
     dialect: 'mysql',
 })

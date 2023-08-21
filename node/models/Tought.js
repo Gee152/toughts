@@ -11,9 +11,14 @@ const Tought = db.define('Tought', {
         type: DataTypes.STRING,
         allowNull: false,
         require: true,
+        /**teste */
+        UserId: {
+            type: DataTypes.INTERGER, foreignKey: true
+        }
     },
 })
 
-Tought.belongsTo(User)
-User.hasMany(Tought)
+Tought.belongsTo(User, { foreignKey: 'UserId'})
+User.hasMany(Tought, { foreignKey: 'UserId'})
+
 module.exports = Tought
